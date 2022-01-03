@@ -5,7 +5,7 @@
 -- Create Date: 01/02/2022 11:56:56 PM
 -- Design Name: Hardware blinky based on nandland tutorial
 -- Module Name: blinky - Behavioral
--- Project Name:
+-- Project Name: Zedboard HW Blinky
 -- Target Devices: Zedboard
 -- Tool Versions: Vivado 2021.2
 -- Description: VHDL implementation based on the nandland blinky
@@ -40,8 +40,7 @@ generic(
 port(
     i_clock: in std_logic;
     i_enable: in std_logic;
-    i_switch_0: in std_logic;
-    i_switch_1: in std_logic;
+    i_switch: in std_logic_vector(0 to 1);
     o_led_drive: out std_logic
 );
 end blinky;
@@ -123,9 +122,9 @@ begin
     end process;
 
     -- Multiplexer implementation, using conditional signal assignment
-    w_led_select <= toggle_1_hz when (i_switch_0 = '0' and i_switch_1 = '0') else
-        toggle_10_hz when (i_switch_0 = '0' and i_switch_1 = '1') else
-        toggle_50_hz when (i_switch_0 = '1' and i_switch_1 = '0') else
+    w_led_select <= toggle_1_hz when i_switch = "00" else
+        toggle_10_hz when i_switch = "01" else
+        toggle_50_hz when i_switch = "10" else
         toggle_100_hz;
     -- Use AND gate here to only route signal if LED is enabled
     o_led_drive <= w_led_select and i_enable;

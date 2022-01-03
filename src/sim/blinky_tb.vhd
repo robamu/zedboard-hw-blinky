@@ -45,8 +45,7 @@ architecture Behavioral of blinky_tb is
     port(
         i_clock: in std_logic;
         i_enable: in std_logic;
-        i_switch_0: in std_logic;
-        i_switch_1: in std_logic;
+        i_switch: in std_logic_vector(0 to 1);
         o_led_drive: out std_logic
     );
     end component;
@@ -54,8 +53,7 @@ architecture Behavioral of blinky_tb is
     signal finished : std_logic := '0';
 
     signal clk: std_logic := '0';
-    signal i_switch_0: std_logic := '0';
-    signal i_switch_1: std_logic := '0';
+    signal i_switch: std_logic_vector(0 to 1) := "00";
     signal led: std_logic := '0';
     signal i_enable: std_logic := '0';
 begin
@@ -67,8 +65,7 @@ begin
     port map (
         i_clock => clk,
         i_enable => i_enable,
-        i_switch_0 => i_switch_0,
-        i_switch_1 => i_switch_1,
+        i_switch => i_switch,
         o_led_drive => led
     );
     -- Clock
@@ -78,20 +75,16 @@ begin
         -- Enable LED driving. LED has duty cycle of 50 %
         i_enable <= '1';
         -- 1 Hz
-        i_switch_0 <= '0';
-        i_switch_1 <= '0';
+        i_switch <= "00";
         wait for 1100ms;
         -- 10 Hz
-        i_switch_0 <= '0';
-        i_switch_1 <= '1';
+        i_switch <= "01";
         wait for 150ms;
         -- 50 Hz
-        i_switch_0 <= '1';
-        i_switch_1 <= '0';
+        i_switch <= "10";
         wait for 50ms;
         -- 100 Hz
-        i_switch_0 <= '1';
-        i_switch_1 <= '1';
+        i_switch <= "11";
         wait for 50ms;
         -- Disable LED driving
         i_enable <= '0';
