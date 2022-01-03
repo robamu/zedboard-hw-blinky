@@ -53,10 +53,10 @@ architecture Behavioral of blinky is
 
     -- Constants to create the frequencies needed:
     -- Formula is: (25 MHz / 100 Hz * 50% duty cycle)
-    constant RESET_COUNT_1_HZ: natural := (clk_freq_mhz * 1_000_000 / 1 * 2);
-    constant RESET_COUNT_10_HZ: natural := (clk_freq_mhz * 1_000_000 / 10 * 2);
-    constant RESET_COUNT_50_HZ: natural := (clk_freq_mhz * 1_000_000 / 50 * 2);
-    constant RESET_COUNT_100_HZ: natural := (clk_freq_mhz * 1_000_000 / 100 * 2);
+    constant RESET_COUNT_1_HZ: natural := (clk_freq_mhz * 1_000_000 / (1 * 2));
+    constant RESET_COUNT_10_HZ: natural := (clk_freq_mhz * 1_000_000 / (10 * 2));
+    constant RESET_COUNT_50_HZ: natural := (clk_freq_mhz * 1_000_000 / (50 * 2));
+    constant RESET_COUNT_100_HZ: natural := (clk_freq_mhz * 1_000_000 / (100 * 2));
 
     signal counter_1_hz: natural range 0 to RESET_COUNT_1_HZ;
     signal counter_10_hz: natural range 0 to RESET_COUNT_10_HZ;
