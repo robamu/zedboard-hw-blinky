@@ -93,6 +93,9 @@ begin
         i_switch_0 <= '1';
         i_switch_1 <= '1';
         wait for 50ms;
+        -- Disable LED driving
+        i_enable <= '0';
+        wait for 50ms;
         -- Signal finish
         finished <= '1';
         wait until finished = '1';
