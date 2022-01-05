@@ -6,7 +6,8 @@
 !.gitignore
 !README.md
 !LICENSE*
-!project_info.tcl
+project_info.tcl
+!def_project_info.tcl
 !proj/
 !repo/
 !src/
