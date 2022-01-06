@@ -31,17 +31,6 @@ architecture Behavioral of debounce_tb is
     constant CLK_MHZ: positive:= 100_000_000;
 
     constant HALF_PERIOD: time := (1 * 100_000_0000 / CLK_MHZ / 2) * 1000 * 1 ps;
-    -- Declare component which will be tested
-    component debouncer is
-    generic(
-        count_max: positive
-    );
-    port(
-        clk: in std_logic;
-        input: in std_logic;
-        output: out std_logic
-    );
-    end component;
 
     signal finished : std_logic := '0';
 
@@ -66,7 +55,7 @@ architecture Behavioral of debounce_tb is
     end procedure;
 begin
    -- Instantiate design-under-test
-    dut: debouncer
+    dut: entity work.debouncer
     generic map(
         count_max => 5
     )
