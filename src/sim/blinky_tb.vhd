@@ -1,35 +1,28 @@
 ----------------------------------------------------------------------------------
--- Company: 
+-- Company:
 -- Engineer: Robin Mueller
--- 
+--
 -- Create Date: 01/03/2022 01:33:49 AM
 -- Design Name: Testbench for blinky.vhd
 -- Module Name: blinky_tb - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
+-- Project Name:
+-- Target Devices:
+-- Tool Versions:
+-- Description:
+--
+-- Dependencies:
+--
 -- Revision:
 -- Revision 0.01 - File Created
 -- Additional Comments:
--- 
+--
 ----------------------------------------------------------------------------------
-
 library IEEE;
 use IEEE.NUMERIC_STD.ALL;
 use IEEE.STD_LOGIC_1164.ALL;
 use std.env.finish;
 
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
-
 entity blinky_tb is
---  Port ( );
 end blinky_tb;
 
 architecture Behavioral of blinky_tb is

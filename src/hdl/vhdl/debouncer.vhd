@@ -18,20 +18,8 @@
 -- Additional Comments:
 --
 ----------------------------------------------------------------------------------
-
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.math_real.all;
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
--- use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity debouncer is
 generic(
@@ -49,7 +37,7 @@ architecture Behavioral of debouncer is
     type T_STATE is (IDLE, TRANS);
     constant count_max_internal: natural := count_max - 1;
 
-    signal counter: integer range 0 to count_max;
+    signal counter: integer range 0 to count_max_internal;
     signal current_state: T_STATE := IDLE;
     signal onoff_state: T_ONOFF_STATE := S_OFF;
 begin
