@@ -22,15 +22,15 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity btn_concat is
 port(
-	btn_u_dbncd: in std_logic;
-	btn_l_dbncd: in std_logic;
-	btn_r_dbncd: in std_logic;
-	btn_d_dbncd: in std_logic;
-	btn_cncd: out std_logic_vector(0 to 2)
+	i_btn_u_dbncd: in std_logic;
+	i_btn_l_dbncd: in std_logic;
+	i_btn_r_dbncd: in std_logic;
+	i_btn_d_dbncd: in std_logic;
+	o_btn_cncd: out std_logic_vector(0 to 2)
 );
 end btn_concat;
 
 architecture Behavioral of btn_concat is
 begin
-	btn_cncd <= btn_u_dbncd & btn_l_dbncd & btn_r_dbncd & btn_u_dbncd;
+	o_btn_cncd <= i_btn_u_dbncd & i_btn_l_dbncd & i_btn_r_dbncd & i_btn_u_dbncd;
 end Behavioral;
