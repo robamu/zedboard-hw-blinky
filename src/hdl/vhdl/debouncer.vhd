@@ -26,7 +26,7 @@ generic(
     count_max: positive := 15
 );
 port(
-    i_clk: in std_logic;
+    i_clock: in std_logic;
     input: in std_logic;
     output: out std_logic
 );
@@ -41,9 +41,9 @@ architecture Behavioral of debouncer is
     signal current_state: T_STATE := IDLE;
     signal onoff_state: T_ONOFF_STATE := S_OFF;
 begin
-    debounce_proc: process(i_clk)
+    debounce_proc: process(i_clock)
     begin
-        if rising_edge(i_clk) then
+        if rising_edge(i_clock) then
             if onoff_state = S_ON then
                 if current_state = IDLE then
                     if input = '0' then
@@ -82,9 +82,9 @@ begin
         end if;
     end process;
 
-    output_proc: process(i_clk)
+    output_proc: process(i_clock)
     begin
-        if rising_edge(i_clk) then
+        if rising_edge(i_clock) then
             case onoff_state is
                 when S_ON => output <= '1';
                 when S_OFF => output <= '0';
