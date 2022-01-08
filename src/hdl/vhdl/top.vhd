@@ -42,18 +42,19 @@ architecture Behavioral of top is
 
     -- Switch register
     signal r_enb_switch: std_logic := '0';
+    signal r_clk_sel: std_logic_vector(0 to 1) := "00";
     signal w_dbncd_u: std_logic;
     signal w_dbncd_l: std_logic;
     signal w_dbncd_r: std_logic;
     signal w_dbncd_d: std_logic;
     signal w_dbncd_c: std_logic;
     signal w_clk_sel: std_logic_vector(0 to 1);
-    signal w_enb_switch: std_logic;
+    signal w_enb_switch: std_logic := '0';
 begin
     -- Instantiate all modules
 
-    -- Debouncers
-    dbncU: entity work.debouncer
+    -- Button Debouncers
+    p_dbnc_u: entity work.debouncer
         generic map(
             count_max => dbnc_max_cycles
         )
@@ -62,7 +63,7 @@ begin
             input => BTNU,
             output => w_dbncd_u
         );
-    dbncL: entity work.debouncer
+    p_dbnc_l: entity work.debouncer
         generic map(
             count_max => dbnc_max_cycles
         )
@@ -71,7 +72,7 @@ begin
             input => BTNL,
             output => w_dbncd_l
         );
-    dbncC: entity work.debouncer
+    p_dbnc_c: entity work.debouncer
         generic map(
             count_max => dbnc_max_cycles
         )
@@ -80,7 +81,7 @@ begin
             input => BTNC,
             output => w_dbncd_c
         );
-    dbncR: entity work.debouncer
+    p_dbnc_r: entity work.debouncer
         generic map(
             count_max => dbnc_max_cycles
         )
@@ -89,7 +90,7 @@ begin
             input => BTNR,
             output => w_dbncd_r
         );
-    dbncD: entity work.debouncer
+    p_dbnc_d: entity work.debouncer
         generic map(
             count_max => dbnc_max_cycles
         )
@@ -99,15 +100,17 @@ begin
             output => w_dbncd_d
         );
 
-    -- Button Concat
-    btn_concat: entity work.btn_concat
+    -- Implements clock select from button press sources
+    p_btn_to_clksel: entity work.btn_to_clksel
         port map(
+            i_clock => GCLK,
             i_btn_u_dbncd => w_dbncd_u,
             i_btn_l_dbncd => w_dbncd_l,
             i_btn_r_dbncd => w_dbncd_r,
             i_btn_d_dbncd => w_dbncd_d,
-            o_btn_cncd => w_clk_sel
+            o_clk_sel => w_clk_sel
         );
+
     -- Process which uses debounced center button to toggle the enable pin
     -- of the blinky module
     p_enable_switch: process (GCLK) is
