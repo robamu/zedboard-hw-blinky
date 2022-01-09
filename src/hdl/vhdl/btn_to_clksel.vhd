@@ -41,12 +41,16 @@ architecture Behavioral of btn_to_clksel is
 	signal r_btn_d: std_logic := '0';
 	signal r_clk_sel: std_logic_vector(0 to 1) := "00";
 begin
-	r_btn_u <= i_btn_u_dbncd;
-	o_clk_sel <= r_clk_sel;
+    o_clk_sel <= r_clk_sel;
 
-	p_btn_edge_detect: process(i_clock)
-	begin
+    p_btn_edge_detect: process(i_clock)
+    begin
         if rising_edge(i_clock) then
+            r_btn_u <= i_btn_u_dbncd;
+            r_btn_l <= i_btn_l_dbncd;
+            r_btn_r <= i_btn_r_dbncd;
+            r_btn_d <= i_btn_d_dbncd;
+
             -- Logic to detect falling edges
             if i_btn_u_dbncd = '0' and r_btn_u = '1' then
                 r_clk_sel <= "00";

@@ -76,7 +76,7 @@ begin
 
     stimuli : process
     begin
-        -- Use higher frequency, easier to simulate
+        -- Start with higher frequency, easier to simulate
         -- Simulate a button press to enable the blinky module and select higher frequency
         enb_switch <= '1';
         button_100_hz <= '1';
@@ -85,6 +85,25 @@ begin
         button_100_hz <= '0';
         wait_cycles_falling_edge(20);
         wait for 20ms;
+
+        -- Select lower frequency
+        button_50_hz <= '1';
+        wait_cycles_falling_edge(20);
+        button_50_hz <= '0';
+        wait for 50ms;
+
+         -- Select lower frequency
+        button_10_hz <= '1';
+        wait_cycles_falling_edge(20);
+        button_10_hz <= '0';
+        wait for 250ms;
+
+        -- Select lower frequency
+        button_1_hz <= '1';
+        wait_cycles_falling_edge(20);
+        button_1_hz <= '0';
+        wait for 1200ms;
+
         -- Signal finish
         finished <= '1';
         wait until finished = '1';

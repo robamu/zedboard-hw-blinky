@@ -38,7 +38,7 @@ port(
 end top;
 
 architecture Behavioral of top is
-    constant dbnc_max_cycles: positive := 15;
+    constant dbnc_max_cycles: positive := 5;
 
     -- Switch register
     signal r_enb_switch: std_logic := '0';

@@ -12,14 +12,14 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0.000000000 ms"></ZoomStartTime>
-      <ZoomEndTime time="20.000420001 ms"></ZoomEndTime>
-      <Cursor1Time time="20.000420000 ms"></Cursor1Time>
+      <ZoomEndTime time="70.000630000 ms"></ZoomEndTime>
+      <Cursor1Time time="70.000630000 ms"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="206"></NameColumnWidth>
+      <NameColumnWidth column_width="202"></NameColumnWidth>
       <ValueColumnWidth column_width="66"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="2" />
+   <WVObjectSize size="3" />
    <wvobject type="group" fp_name="group49">
       <obj_property name="label">Input</obj_property>
       <obj_property name="DisplayName">label</obj_property>
@@ -56,6 +56,20 @@
       <wvobject type="logic" fp_name="/zedboard_blinky_tb/dut/LD0">
          <obj_property name="ElementShortName">LD0</obj_property>
          <obj_property name="ObjectShortName">LD0</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group25">
+      <obj_property name="label">Internal</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="logic" fp_name="/zedboard_blinky_tb/dut/blinky/i_enable">
+         <obj_property name="ElementShortName">i_enable</obj_property>
+         <obj_property name="ObjectShortName">i_enable</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/zedboard_blinky_tb/dut/blinky/i_switch">
+         <obj_property name="ElementShortName">i_switch[0:1]</obj_property>
+         <obj_property name="ObjectShortName">i_switch[0:1]</obj_property>
+         <obj_property name="isExpanded"></obj_property>
       </wvobject>
    </wvobject>
 </wave_config>
