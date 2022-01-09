@@ -45,3 +45,7 @@ following steps
    Vivado project file in the `proj` folder. Open this file in Vivado.
 
 ## Flashing the project onto the ZedBoard
+
+1. Open the project with Vivado
+2. Generate the bitstream
+3. Use the hardware manager in Vivado to flash the board

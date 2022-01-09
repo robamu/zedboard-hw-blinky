@@ -41,7 +41,7 @@ architecture Behavioral of top is
     constant dbnc_max_cycles: positive := 5;
 
     -- Switch register
-    signal r_enb_switch: std_logic := '0';
+
     signal r_clk_sel: std_logic_vector(0 to 1) := "00";
     signal w_dbncd_u: std_logic;
     signal w_dbncd_l: std_logic;
@@ -54,54 +54,54 @@ begin
     -- Instantiate all modules
 
     -- Button Debouncers
-    p_dbnc_u: entity work.debouncer
+    dbnc_u: entity work.debouncer
         generic map(
             count_max => dbnc_max_cycles
         )
         port map (
             i_clock => GCLK,
-            input => BTNU,
-            output => w_dbncd_u
+            i_raw => BTNU,
+            o_dbncd => w_dbncd_u
         );
-    p_dbnc_l: entity work.debouncer
+    dbnc_l: entity work.debouncer
         generic map(
             count_max => dbnc_max_cycles
         )
         port map (
             i_clock => GCLK,
-            input => BTNL,
-            output => w_dbncd_l
+            i_raw => BTNL,
+            o_dbncd => w_dbncd_l
         );
-    p_dbnc_c: entity work.debouncer
+    dbnc_c: entity work.debouncer
         generic map(
             count_max => dbnc_max_cycles
         )
         port map (
             i_clock => GCLK,
-            input => BTNC,
-            output => w_dbncd_c
+            i_raw => BTNC,
+            o_dbncd => w_dbncd_c
         );
-    p_dbnc_r: entity work.debouncer
+    dbnc_r: entity work.debouncer
         generic map(
             count_max => dbnc_max_cycles
         )
         port map (
             i_clock => GCLK,
-            input => BTNR,
-            output => w_dbncd_r
+            i_raw => BTNR,
+            o_dbncd => w_dbncd_r
         );
-    p_dbnc_d: entity work.debouncer
+    dbnc_d: entity work.debouncer
         generic map(
             count_max => dbnc_max_cycles
         )
         port map (
             i_clock => GCLK,
-            input => BTND,
-            output => w_dbncd_d
+            i_raw => BTND,
+            o_dbncd => w_dbncd_d
         );
 
     -- Implements clock select from button press sources
-    p_btn_to_clksel: entity work.btn_to_clksel
+    btn_to_clksel: entity work.btn_to_clksel
         port map(
             i_clock => GCLK,
             i_btn_u_dbncd => w_dbncd_u,
@@ -111,20 +111,12 @@ begin
             o_clk_sel => w_clk_sel
         );
 
-    -- Process which uses debounced center button to toggle the enable pin
-    -- of the blinky module
-    p_enable_switch: process (GCLK) is
-    begin
-        if rising_edge(GCLK) then
-            -- Creates a register
-            r_enb_switch <= w_dbncd_c;
-
-            -- Logic to detect falling edge
-            if w_dbncd_c = '0' and r_enb_switch = '1' then
-                w_enb_switch <= not w_enb_switch;
-            end if;
-        end if;
-    end process;
+    btn_enable_toggler: entity work.btn_enable_toggle
+        port map(
+            i_clock => GCLK,
+            i_btn_dbncd => w_dbncd_c,
+            o_enb_switch => w_enb_switch
+        );
 
     -- HW Blinky Module
     blinky: entity work.blinky

@@ -27,8 +27,8 @@ generic(
 );
 port(
     i_clock: in std_logic;
-    input: in std_logic;
-    output: out std_logic
+    i_raw: in std_logic;
+    o_dbncd: out std_logic
 );
 end debouncer;
 
@@ -46,11 +46,11 @@ begin
         if rising_edge(i_clock) then
             if onoff_state = S_ON then
                 if current_state = IDLE then
-                    if input = '0' then
+                    if i_raw = '0' then
                         current_state <= TRANS;
                     end if;
                 elsif current_state = TRANS then
-                    if input = '1' then
+                    if i_raw = '1' then
                         current_state <= IDLE;
                         counter <= 0;
                     elsif counter = count_max_internal - 1 then
@@ -63,11 +63,11 @@ begin
                 end if;
             elsif onoff_state = S_OFF then
                 if current_state = IDLE then
-                    if input = '1' then
+                    if i_raw = '1' then
                         current_state <= TRANS;
                     end if;
                 elsif current_state = TRANS then
-                    if input = '0' then
+                    if i_raw = '0' then
                         current_state <= IDLE;
                         counter <= 0;
                     elsif counter = count_max_internal - 1 then
@@ -86,8 +86,8 @@ begin
     begin
         if rising_edge(i_clock) then
             case onoff_state is
-                when S_ON => output <= '1';
-                when S_OFF => output <= '0';
+                when S_ON => o_dbncd <= '1';
+                when S_OFF => o_dbncd <= '0';
             end case;
         end if;
     end process;
