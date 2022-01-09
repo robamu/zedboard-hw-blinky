@@ -5,6 +5,12 @@ This is the adaption of the [nandland LED blinky](https://www.nandland.com/vhdl/
 project to the [ZedBoard](https://www.avnet.com/wps/portal/us/products/avnet-boards/avnet-board-families/zedboard/).
 
 It also includes a set of testbenches for various of the used modules and for the top module.
+There are two possible ways to generate the hardware:
+
+- Using the block design which can be loaded with the `src/bd/hw_blinky.tcl` file
+- Using the top design `src/hdl/vhdl/top.vhd`. It is loaded during project generation
+
+Set one of those two options as the top design before generating the bitstream.
 
 ## Prerequisites
 
@@ -45,6 +51,8 @@ following steps
    Vivado project file in the `proj` folder. Open this file in Vivado.
 
 ## Flashing the project onto the ZedBoard
+
+Requires that the project was generated.
 
 1. Open the project with Vivado
 2. Generate the bitstream
